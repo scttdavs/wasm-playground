@@ -1,14 +1,14 @@
 // https://github.com/torch2424/wasm-by-example/blob/master/demo-util/
-export const wasmBrowserInstantiate = async (wasmModuleUrl, importObject) => {
+export const wasmBrowserInstantiate = async (wasmModuleUrl, importObj = {}) => {
   let response = undefined;
 
-  if (!importObject) {
-    importObject = {
-      env: {
-        abort: () => console.log("Abort!")
-      }
-    };
-  }
+  const importObject = Object.assign({}, {
+    env: {
+      abort: () => console.log("Abort!")
+    }
+  }, importObj);
+
+  console.log(importObject);
 
   // Check if the browser supports streaming instantiation
   if (WebAssembly.instantiateStreaming) {
